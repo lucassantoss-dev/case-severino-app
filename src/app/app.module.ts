@@ -10,6 +10,9 @@ import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClienteRoutingModule } from './components/cliente/cliente-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SolicitacaoFormComponent } from './components/solicitacao/solicitacao-form/solicitacao-form.component';
+import { SolicitacaoRoutingModule } from './components/solicitacao/solicitacao-routing.module';
+import { NavbarComponent } from './templates/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LayoutComponent,
     SidebarComponent,
     ClienteFormComponent,
+    SolicitacaoFormComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     ClienteRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SolicitacaoRoutingModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
