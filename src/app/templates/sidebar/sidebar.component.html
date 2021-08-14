@@ -1,0 +1,86 @@
+<div id="layoutSidenav_nav">
+    <nav
+      [style]="getColorSidenav()"
+      class="sb-sidenav accordion sb-sidenav-dark"
+      id="sidenavAccordion"
+    >
+      <div class="sb-sidenav-menu">
+        <div class="nav">
+          <div class="sb-sidenav-menu-heading">Painel do Cliente</div>
+          <a class="nav-link" routerLink="/cliente/form"
+            ><div class="sb-nav-link-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            Cliente</a
+          >
+          <div (click)="openSuporte()">
+            <a class="nav-link" type="button">
+              <div class="sb-nav-link-icon">
+                <i class="fa fa-user-circle"></i>
+              </div>
+              Suporte
+              <div class="sb-nav-link-icon" *ngIf="!visibleProfile">
+                <i class="fa fa-arrow-down"></i>
+              </div>
+              <div class="sb-nav-link-icon" *ngIf="visibleProfile">
+                <i class="fa fa-arrow-up"></i>
+              </div>
+            </a>
+          </div>
+          <a
+            class="nav-link collapsed"
+            [routerLink]="['/solicitar', 'avaliar']"
+            [style]="getBackgroundColorOnVisibleProfile()"
+            *ngIf="visibleProfile"
+          >
+            <div class="sb-nav-link-icon">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            Solicitar</a
+          >
+          <a
+            class="nav-link collapsed"
+            [routerLink]="['/perfil', 'alterar-senha']"
+            data-toggle="collapse"
+            data-target="#collapsePages"
+            aria-expanded="false"
+            aria-controls="collapsePages"
+            [style]="getBackgroundColorOnVisibleProfile()"
+            *ngIf="visibleProfile"
+          >
+            <div class="sb-nav-link-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            Avaliar Solicitação</a
+          >
+  
+          <a
+            class="nav-link collapsed"
+            routerLink="/beneficios/novo-beneficio"
+            data-toggle="collapse"
+            data-target="#collapsePages"
+            aria-expanded="false"
+            aria-controls="collapsePages"
+          >
+            <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+            Chat Online
+          </a>
+          <div class="sb-sidenav-menu-heading">Logout</div>
+  
+          <button
+            class="nav-link collapsed logout"
+            (click)="logout()"
+            data-toggle="collapse"
+            data-target="#collapseLayouts"
+            aria-expanded="false"
+            aria-controls="collapseLayouts"
+            ><div class="sb-nav-link-icon">
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
+            Sair
+          </button>
+        </div>
+      </div>
+    </nav>
+  </div>
+  
