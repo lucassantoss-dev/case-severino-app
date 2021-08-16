@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SolicitacaoFormComponent } from './components/solicitacao/solicitacao-form/solicitacao-form.component';
 import { SolicitacaoRoutingModule } from './components/solicitacao/solicitacao-routing.module';
 import { NavbarComponent } from './templates/navbar/navbar.component';
+import { ClienteModule } from './components/cliente/cliente.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { NavbarComponent } from './templates/navbar/navbar.component';
     LoginComponent,
     LayoutComponent,
     SidebarComponent,
-    ClienteFormComponent,
+    //ClienteFormComponent,
     SolicitacaoFormComponent,
     NavbarComponent,
   ],
@@ -31,7 +32,8 @@ import { NavbarComponent } from './templates/navbar/navbar.component';
     ReactiveFormsModule,
     ClienteRoutingModule,
     BrowserAnimationsModule,
-    SolicitacaoRoutingModule
+    SolicitacaoRoutingModule,
+    ClienteModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
