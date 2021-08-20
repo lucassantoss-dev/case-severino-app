@@ -1,9 +1,135 @@
-<div>
-    <form>
-        <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Nome: </mat-label>
-            <input matInput />
-            
+<h1 class="breadcrumb mt-4">Adicionar Nova solicitacao</h1>
+
+<div class="container addSolicitacao">
+  <form (ngSubmit)="salvar()" [formGroup]="solicitacaoForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Descrição: </mat-label>
+      <input
+        matInput
+        required
+        formControlName="descricao"
+        [(ngModel)]="solicitacao.descricao"
+      />
+      <div
+        *ngIf="
+          !solicitacaoForm.get('descricao').pristine &&
+          solicitacaoForm.get('descricao').errors
+        "
+      >
+        <p *ngIf="solicitacaoForm.get('descricao').errors.required">
+          Descrição é obrigatória.
+        </p>
+        <p *ngIf="solicitacaoForm.get('descricao').errors.minlength">
+          Descrição deve ter no mínimo 3 caracters.
+        </p>
+        <p *ngIf="solicitacaoForm.get('descricao').errors.maxlength">
+          Descrição deve ter no máximo 100 caracters.
+        </p>
+      </div>
+    </mat-form-field>
+    <div class="col-md-6">
+      <mat-form-field class="example-form w-100" appearance="fill">
+        <mat-label>Cliente:* </mat-label>
+        <mat-select
+          (change)="change()"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="solicitacao.cliente"
+        >
+          <mat-option
+            *ngFor="let cliente of cliente"
+            [value]="cliente.nome"
+          >
+            {{ cliente.nome }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field appearance="fill">
+          <mat-label>usuario</mat-label>
+          <input
+            matInput
+            required
+            type="text"
+            formControlName="usuario"
+            [(ngModel)]="solicitacao.usuario"
+          />
+          <div
+            *ngIf="
+              !solicitacaoForm.get('usuario').pristine &&
+              solicitacaoForm.get('usuario').errors
+            "
+          >
+          </div>
         </mat-form-field>
-    </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Data Abertura: </mat-label>
+          <input
+            matInput
+            required
+            type="date"
+            [(ngModel)]="solicitacao.dataAbertura"
+            formControlName="dataAbertura"
+          />
+          <div
+            *ngIf="
+              !solicitacaoForm.get('dataAbertura').pristine &&
+              solicitacaoForm.get('dataAbertura').errors
+            "
+          >
+          </div>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Data Encerramento: </mat-label>
+          <input
+            matInput
+            required
+            type="date"
+            [(ngModel)]="solicitacao.dataEncerramento"
+            formControlName="dataEncerramento"
+          />
+          <div
+            *ngIf="
+              !solicitacaoForm.get('dataEncerramento').pristine &&
+              solicitacaoForm.get('dataEncerramento').errors
+            "
+          >
+          </div>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <mat-label
+        >Status
+        <mat-slide-toggle
+        [(ngModel)]="solicitacao.status"
+        formControlName="status" color="primary" (change)="onChange($event)">{{ status }}</mat-slide-toggle>
+      </mat-label>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <button
+          [disabled]="!solicitacaoForm.valid"
+          type="submit"
+          class="btn btn-primary"
+        >
+          <i class="fa fa-save"></i> Salvar
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="voltarParaListagem()"
+        >
+          <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

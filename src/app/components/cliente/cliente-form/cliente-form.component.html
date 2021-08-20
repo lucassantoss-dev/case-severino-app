@@ -7,22 +7,22 @@
       <input
         matInput
         required
-        formControlName="nome_cliente"
-        [(ngModel)]="cliente.nome_cliente"
+        formControlName="nome"
+        [(ngModel)]="cliente.nome"
       />
       <div
         *ngIf="
-          !clienteForm.get('nome_cliente').pristine &&
-          clienteForm.get('nome_cliente').errors
+          !clienteForm.get('nome').pristine &&
+          clienteForm.get('nome').errors
         "
       >
-        <p *ngIf="clienteForm.get('nome_cliente').errors.required">
+        <p *ngIf="clienteForm.get('nome').errors.required">
           Nome é obrigatório.
         </p>
-        <p *ngIf="clienteForm.get('nome_cliente').errors.minlength">
+        <p *ngIf="clienteForm.get('nome').errors.minlength">
           Nome deve ter no mínimo 3 caracters.
         </p>
-        <p *ngIf="clienteForm.get('nome_cliente').errors.maxlength">
+        <p *ngIf="clienteForm.get('nome').errors.maxlength">
           Nome deve ter no máximo 100 caracters.
         </p>
       </div>

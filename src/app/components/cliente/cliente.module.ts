@@ -11,14 +11,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from "@angular/material/input";
+import { HttpClientModule } from '@angular/common/http';
+import { ClienteListaComponent } from './cliente-lista/cliente-lista.component';
 
 
 @NgModule({
   declarations: [
-    ClienteFormComponent
+    ClienteFormComponent,
+    ClienteListaComponent
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     ClienteRoutingModule,
     FormsModule,
     ReactiveFormsModule,

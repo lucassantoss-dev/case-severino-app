@@ -5,21 +5,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/resources/services/alert.service';
 import { ClienteService } from 'src/app/resources/services/cliente.service';
-import { SolicitacaoService } from 'src/app/resources/services/solicitacao.service';
-import { Cliente } from '../../cliente/Cliente';
-import { Solicitacao } from '../solicitacao';
+import { Cliente } from '../Cliente';
 
 @Component({
-  selector: 'app-solicitacao-lista',
-  templateUrl: './solicitacao-lista.component.html',
-  styleUrls: ['./solicitacao-lista.component.css']
+  selector: 'app-cliente-lista',
+  templateUrl: './cliente-lista.component.html',
+  styleUrls: ['./cliente-lista.component.css']
 })
-export class SolicitacaoListaComponent implements OnInit {
+export class ClienteListaComponent implements OnInit {
 
-  solicitacao: Solicitacao[] = [];
-  solicitacaoSelecionada: Solicitacao = null;
-  mensagemSucesso: string;
-  mensagemErro: string;
+  cliente: Cliente[] = [];
+  clienteSelecionado: Cliente = null;
 
   displayedColumns: string[] = [
     "descricao",
@@ -28,21 +24,21 @@ export class SolicitacaoListaComponent implements OnInit {
     "dataAbertura",
     "acoes"
   ];
-  dataSource: MatTableDataSource<Solicitacao> = null;
+  dataSource: MatTableDataSource<Cliente> = null;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) matSort: MatSort;
 
   constructor(
-    private service: SolicitacaoService,
+    private service: ClienteService,
     private router: Router,
     private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
-    this.service.getsolicitacao().subscribe((response) => {
-      this.solicitacao = response;
-      this.dataSource = new MatTableDataSource<Solicitacao>(this.solicitacao);
+    this.service.getCliente().subscribe((response) => {
+      this.cliente = response;
+      this.dataSource = new MatTableDataSource<Cliente>(this.cliente);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.matSort;
     });
@@ -60,13 +56,13 @@ export class SolicitacaoListaComponent implements OnInit {
   }
 
   novoCadastro() {
-    this.router.navigate(["/solicitacao/form"]);
+    this.router.navigate(["/cliente/form"]);
   }
-  preparaDelecao(solicitacao: Solicitacao) {
-    this.solicitacaoSelecionada = solicitacao;
+  preparaDelecao(cliente: Cliente) {
+    this.clienteSelecionado = cliente;
   }
   deletarSolicitacao() {
-    this.service.deletar(this.solicitacaoSelecionada).subscribe(
+    this.service.deletar(this.clienteSelecionado).subscribe(
       (response) => {
         this.alertService.success(
           "Maravilha",
@@ -79,4 +75,5 @@ export class SolicitacaoListaComponent implements OnInit {
       }
     );
   }
+
 }

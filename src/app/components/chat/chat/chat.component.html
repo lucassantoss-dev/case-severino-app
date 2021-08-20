@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-danger" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Iniciar Chat
+      </button>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Cliente</label>
+              <input type="text" class="form-control" id="cliente" [(ngModel)]="cliente">
+            </div>
+          </form>
+          <div class="list-group list-group-flush border-bottom scrollarea">
+            <div class="list-group-item list-group-item-action py-3 lh-right" *ngFor="let msg og mensagens">
+              <div class="d-flex w-100 align-itens-center justify-content-between">
+                <strong class="mb-1">{{msg.cliente}}</strong>
+              </div>
+              <div class="col-10 mb-1 small">{{msg.mensagem}}</div>
+            </div>
+          </div>
+          <form>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Mensagem:</label>
+              <textarea 
+              class="form-control" 
+              id="message-text"
+              placeholder="Escreva a mensagem!" 
+              [value]="mensagem"
+              (change)="mensagem = $event.target.value"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">Enviar mensagem</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

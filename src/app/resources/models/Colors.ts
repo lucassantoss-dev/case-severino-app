@@ -1,6 +1,7 @@
 export class Colors {
     cor_primaria = 'blue';
     cor_secundaria = '#285472';
+    cor_terciaria = '#a10008';
       /* --cor-menu: linear-gradient(0deg, rgba(145,100,8,1) 0%, rgba(217,159,0,1) 59%, rgba(236,216,72,1) 100%); */
     menu_odd = '#285472';
     cor_barra_menu = '#fff';

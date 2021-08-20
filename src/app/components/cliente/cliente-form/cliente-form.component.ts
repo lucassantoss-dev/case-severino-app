@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { Cliente } from '../Cliente';
+import { ClienteService } from 'src/app/resources/services/cliente.service';
+import { AlertService } from 'src/app/resources/services/alert.service';
 
 @Component({
   selector: 'app-cliente-form',
@@ -17,15 +19,19 @@ export class ClienteFormComponent implements OnInit {
   colorSituacao: string;
   situacao: string = 'Inativo';
   Validators: any;
+  id: number;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private clienteService: ClienteService,
+    private alertService: AlertService
   ) { 
     this.cliente = new Cliente();
   }
 
   ngOnInit(): void {
+    this.configurarFormulario();
   }
   onChange($event: MatSlideToggleChange) {
     if(!$event.checked){
@@ -38,7 +44,7 @@ export class ClienteFormComponent implements OnInit {
   configurarFormulario() {
     this.clienteForm = this.formBuilder.group(
       {
-        nome_cliente: [
+        nome: [
           null,
           Validators.compose([
             Validators.required,
@@ -74,22 +80,29 @@ export class ClienteFormComponent implements OnInit {
     controle.get("confirmar_senha").setErrors({ senhasNaoCoincidem: true });
   }
   salvar() {
-    //console.log("Clicou");
-    const dadosFormulario = this.clienteForm.value;
+    this.configurarFormulario();
+    if(this.id){
+      this.clienteService
+      .atualizar(this.cliente)
+      .subscribe(response => {
+        this.alertService.success('Maravilha', 'Cliente atualizado com sucesso');
+      }, errorResponse => {
+        this.alertService.info('error', 'Erro ao atualizar o cliente!');
+      })
 
-    if (this.cliente && this.clienteForm.valid) {
-      // this.usuarioService
-      //   .salvarUsuarios(this.cliente)
-      //   .subscribe((response) => console.log("Teste"));
-
-      //console.log(dadosFormulario)
-      this.clienteForm.reset();
-      this.router.navigate(["usuarios/lista"]);
+    }else {
+    this.clienteService
+      .salvar(this.cliente)
+      .subscribe( (data) => {
+        this.alertService.success('Ótimo', 'Cliente criado com sucesso!');
+      }, (errorResponse) => {
+        this.alertService.error(errorResponse.error.message);
+        })
     }
   }
 
   voltarParaListagem() {
-    this.router.navigate(["usuarios/lista"]);
+    this.router.navigate(["layout"]);
   }
 
 }
